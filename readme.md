@@ -31,3 +31,17 @@ await api.query({
   }
 });
 ```
+
+## client
+```ts
+import { generateApolloClient } from '@deepcase/hasura/client';
+const client = generateApolloClient({ // all options are optional
+  ws: true, // need to socket for subscriptions // recommended
+  secret: 'adminSecretForRoot', // admin secret for root access // not need when token exists
+  token: 'tokenFromCookiesOrLocalStorage', // token for auth webhook auth // ignored when secret exists
+  ssl: true; // auto http/https ws/wss protocol
+  path: 'hasura.domain.com', // link to hasura location
+  headers: {}, // custom additional fields into headers
+  initialStore: {},
+});
+```

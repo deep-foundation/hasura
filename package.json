@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -13,8 +13,13 @@
   ],
   "description": "",
   "dependencies": {
+    "apollo-boost": "^0.4.9",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-ws": "^1.0.20",
     "axios": "^0.21.1",
-    "debug": "^4.3.1"
+    "debug": "^4.3.1",
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
@@ -25,6 +30,5 @@
     "@types/node": "^14.0.23",
     "pre-commit": "^1.2.2",
     "typescript": "^3.9.7"
-  },
-  "peerDependencies": {}
+  }
 }
