@@ -1,0 +1,30 @@
+{
+  "name": "@deepcase/hasura",
+  "version": "0.0.1",
+  "license": "ISC",
+  "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
+  "homepage": "https://github.com/deepcase/hasura",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/deepcase/hasura.git"
+  },
+  "pre-commit": [
+    "build"
+  ],
+  "description": "",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "debug": "^4.3.1"
+  },
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json",
+    "unbuild": "rm -f ./*.js && rm -f ./*.js.map",
+    "npm-publish": "npm run build && npm publish && npm run unbuild"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.23",
+    "pre-commit": "^1.2.2",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {}
+}
