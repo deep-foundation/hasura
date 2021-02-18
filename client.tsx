@@ -32,6 +32,7 @@ export function generateApolloClient(
 
   const httpLink = new HttpLink({
     uri: `http${options.ssl ? 's' : ''}://${options.path || ''}`,
+    // @ts-ignore
     fetch,
     headers,
   });
