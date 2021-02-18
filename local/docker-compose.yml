@@ -6,6 +6,7 @@ services:
     volumes:
     - db_data:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespassword
       PGGSSENCMODE: disable
       PGSSLMODE: disable
@@ -29,6 +30,6 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      HASURA_GRAPHQL_AUTH_HOOK: http://dockerhost:4000/api/auth/bearer
+      # HASURA_GRAPHQL_AUTH_HOOK: http://dockerhost:4000/api/auth/bearer
 volumes:
   db_data:

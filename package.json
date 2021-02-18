@@ -25,7 +25,7 @@
     "build": "npx tsc --project tsconfig.json",
     "unbuild": "rm -f ./*.js && rm -f ./*.js.map",
     "npm-publish": "npm run build && npm publish && npm run unbuild",
-    "docker-local": "sudo apt install net-tools && export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1) && (cd ./local && docker-compose up -d)"
+    "docker-local": "(sudo apt install net-tools && export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1) && cd ./local && docker-compose up -d)"
   },
   "devDependencies": {
     "@types/node": "^14.0.23",
