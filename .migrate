@@ -1,9 +1,0 @@
-{
-  "lastRun": "1614062095551-api-auth-test-remote-schema.ts",
-  "migrations": [
-    {
-      "title": "1614062095551-api-auth-test-remote-schema.ts",
-      "timestamp": 1614069415010
-    }
-  ]
-}
