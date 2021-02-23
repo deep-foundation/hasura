@@ -13,7 +13,7 @@
     "screen": "export $(grep -v '^#' .env | xargs); npm run migrate; npm run dev"
   },
   "dependencies": {
-    "@deepcase/hasura": "^0.0.3",
+    "@deepcase/hasura": "^0.0.4",
     "apollo-boost": "^0.4.9",
     "apollo-server": "^2.21.0",
     "next": "10.0.7",
