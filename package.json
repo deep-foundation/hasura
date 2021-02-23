@@ -8,9 +8,9 @@
     "export": "next export",
     "start": "next start",
     "gh-pages": "npm run build; npm run export; rm -rf ../hasura-gh-pages/*; mv ./out/* ../hasura-gh-pages/; rm -rf out",
-    "migrate": "yes | DEBUG='*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "unmigrate": "yes | DEBUG='*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "screen": "export $(grep -v '^#' .env | xargs); npm run migrate; npm run dev"
+    "migrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "unmigrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "screen": "export $(grep -v '^#' .env | xargs); npm run dev"
   },
   "dependencies": {
     "@deepcase/hasura": "^0.0.4",
