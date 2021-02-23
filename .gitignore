@@ -120,5 +120,5 @@ projects/app/electron/app
 .migrate
 
 # deepcase
-*.js
-*.js.map
+/*.js
+/*.js.map
