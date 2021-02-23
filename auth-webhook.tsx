@@ -1,4 +1,5 @@
 import Cors from 'cors';
+import { corsMiddleware } from './cors-middleware';
 
 export interface AuthWebhookOptions {
   findUserByToken: (token: string) => Promise<{
@@ -6,13 +7,6 @@ export interface AuthWebhookOptions {
     'X-Hasura-User-Id': string;
     [key: string]: string;
   }>;
-}
-
-export const corsMiddleware = async (req, res, cors) => {
-  return await new Promise((resolve, reject) => cors(req, res, (result) => {
-    if (result instanceof Error) return reject(result);
-    return resolve(result);
-  }));
 }
 
 export const generateAuthWebhookNextjs = function generateAuthWebhookNextjs(
