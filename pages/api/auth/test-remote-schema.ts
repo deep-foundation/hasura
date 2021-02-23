@@ -23,4 +23,4 @@ const resolvers = {
   }
 };
 
-export default generateRemoteSchema({ typeDefs, resolvers });
+module.exports = generateRemoteSchema({ typeDefs, resolvers, path: '/api/auth/test-remote-schema' });

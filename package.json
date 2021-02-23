@@ -10,7 +10,7 @@
     "gh-pages": "npm run build && npm run export && rm -rf ../hasura-gh-pages/* && mv ./out/* ../hasura-gh-pages/ && rm -rf out"
   },
   "dependencies": {
-    "@deepcase/hasura": "^0.0.2",
+    "@deepcase/hasura": "^0.0.3",
     "apollo-boost": "^0.4.9",
     "apollo-server": "^2.21.0",
     "next": "10.0.7",
