@@ -1,9 +1,9 @@
 import { HasuraApi } from '@deepcase/hasura/api';
 
 const api = new HasuraApi({
-  path: 'localhost:8080',
-  ssl: false,
-  secret: 'myadminsecretkey'
+  path: process.env.MIGRATIONS_HASURA_PATH,
+  ssl: !!+process.env.MIGRATIONS_HASURA_SSL,
+  secret: process.env.MIGRATIONS_HASURA_SECRET,
 });
 
 export const up = async () => {
@@ -12,7 +12,7 @@ export const up = async () => {
     args: {
       name: 'hasura_example_auth_test',
       definition: {
-          url: 'http://dockerhost:3001/api/auth/test-rs',
+          url: `${process.env.MIGRATIONS_EXAMPLE_URL}/api/auth/test-rs`,
           headers: [{ name: 'x-hasura-client', value: 'hasura-example' }],
           forward_client_headers: true,
           timeout_seconds: 60
