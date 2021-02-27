@@ -14,9 +14,7 @@ function DemoTokenProvider({ children }: { children?: any }) {
   return <TokenContext.Provider value={token}>{children}</TokenContext.Provider>
 }
 
-export const AUTH_TEST = gql`query AUTH_TEST {
-  authTest { userId role }
-}`;
+export const AUTH_TEST = gql`query AUTH_TEST { authTest { userId role } }`;
 
 export function PageConnected() {
   const [,setToken] = useDemoTokenController();
@@ -27,6 +25,10 @@ export function PageConnected() {
     <div><button onClick={() => {
       setToken(Math.random().toString(36).substring(7));
     }}>randomizeToken</button></div>
+    <div>(apollo client will be reconnected and refresh each old query/subscription)</div>
+    <div>gql request</div>
+    <div>{`query AUTH_TEST { authTest { userId role } }`}</div>
+    <div>gql response</div>
     <div>{JSON.stringify(q?.error)}</div>
     <div>{JSON.stringify(q?.data)}</div>
   </>

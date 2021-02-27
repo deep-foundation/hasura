@@ -1,5 +1,22 @@
 # deepcase hasura example
 
+## install
+
+```
+npm i
+```
+
+Create `.env` file:
+```sh
+MIGRATIONS_HASURA_PATH=localhost:8080
+MIGRATIONS_HASURA_SSL=0
+MIGRATIONS_HASURA_SECRET=myadminsecretkey
+MIGRATIONS_EXAMPLE_URL=ACCESSABLE_PUBLIC_URL
+HASURA_PATH=localhost:8080
+HASURA_SSL=0
+PORT=3001
+```
+
 ## settings
 
 ```js

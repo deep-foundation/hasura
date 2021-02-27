@@ -14,13 +14,16 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     authTest: async (source, args, context, info) => {
-      console.log(source, args, context, info);
       return {
-        role: 'demo',
-        userId: 'demo',
+        role: context?.headers?.['x-hasura-role'],
+        userId: context?.headers?.['x-hasura-user-id'],
       };
     },
   }
 };
 
-module.exports = generateRemoteSchema({ typeDefs, resolvers, path: '/api/auth/test-rs' });
+const context = ({ req }) => {
+  return { headers: req.headers };
+};
+
+module.exports = generateRemoteSchema({ typeDefs, resolvers, context, path: '/api/auth/test-rs' });
