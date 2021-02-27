@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "hasura-example",
   "version": "0.0.2",
   "private": true,
   "scripts": {
@@ -10,12 +10,17 @@
     "gh-pages": "npm run build; npm run export; rm -rf ../hasura-gh-pages/*; mv ./out/* ../hasura-gh-pages/; rm -rf out",
     "migrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
     "unmigrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "screen": "export $(grep -v '^#' .env | xargs); npm run dev"
+    "gitpod": "export $(grep -v '^#' .env | xargs); export HASURA_URL=$(gp url 8080); export PORT=3001; npx next dev -p $PORT"
   },
   "dependencies": {
     "@deepcase/hasura": "^0.0.4",
+    "@deepcase/react-hasura": "^0.0.0",
+    "@deepcase/store": "^0.0.31",
     "apollo-boost": "^0.4.9",
     "apollo-server": "^2.21.0",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^6.0.2",
+    "graphql-tag": "^2.11.0",
     "next": "10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1"

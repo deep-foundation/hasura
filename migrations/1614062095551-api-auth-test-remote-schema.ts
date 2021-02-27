@@ -12,10 +12,10 @@ export const up = async () => {
     args: {
       name: 'hasura_example_auth_test',
       definition: {
-          url: `${process.env.MIGRATIONS_EXAMPLE_URL}/api/auth/test-rs`,
-          headers: [{ name: 'x-hasura-client', value: 'hasura-example' }],
-          forward_client_headers: true,
-          timeout_seconds: 60
+        url: `${process.env.MIGRATIONS_EXAMPLE_URL}/api/auth/test-rs`,
+        headers: [{ name: 'x-hasura-client', value: 'hasura-example' }],
+        forward_client_headers: true,
+        timeout_seconds: 60
       },
     }
   });
