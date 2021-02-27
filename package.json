@@ -13,8 +13,8 @@
   ],
   "description": "",
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "apollo-boost": "^0.4.9",
-    "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
     "apollo-link-ws": "^1.0.20",
     "apollo-server-micro": "^2.21.0",
@@ -26,17 +26,19 @@
     "express": "^4.17.1",
     "migrate": "^1.7.0",
     "node-fetch": "^2.6.1",
+    "react": "^17.0.1",
     "ts-node": "^9.1.1"
   },
   "scripts": {
     "package:build": "npx tsc --project tsconfig.json",
-    "package:unbuild": "rm -f ./*.js; rm -f ./*.js.map",
-    "package:publish": "npm run package:build; npm publish; npm run package:unbuild",
+    "package:unbuild": "rm -f ./*.js; rm -f ./*.js.map; rm -f ./*.d.ts",
+    "package:publish": "npm run package:build; npm publish --access public; npm run package:unbuild",
     "docker-local": "(sudo apt install net-tools; export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1); cd ./local; docker-compose up -d)",
-    "screen": "(export $(grep -v '^#' .env | xargs); npm run docker-local)"
+    "gitpod": "(export $(grep -v '^#' .env | xargs); npm run docker-local)"
   },
   "devDependencies": {
     "@types/node": "^14.0.23",
+    "@types/react": "^17.0.2",
     "pre-commit": "^1.2.2",
     "typescript": "^3.9.7"
   }

@@ -1,12 +1,13 @@
 import { HttpLink, InMemoryCache } from 'apollo-boost';
-import ApolloClient from 'apollo-client';
+import { ApolloClient } from '@apollo/react-hooks';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 
-interface IOptions {
+export interface IApolloClientGeneratorOptions {
   initialStore?: any;
   token?: string;
+  client?: string;
   secret?: string;
   ssl?: boolean;
   path?: string;
@@ -14,15 +15,16 @@ interface IOptions {
   ws?: boolean;
 }
 
-export function generateHeaders(options: IOptions) {
-  const headers: IOptions['headers'] = { ...options.headers };
+export function generateHeaders(options: IApolloClientGeneratorOptions) {
+  const headers: IApolloClientGeneratorOptions['headers'] = { ...options.headers };
   if (options.token) headers.Authorization = `Bearer ${options.token}`;
   if (options.secret) headers['x-hasura-admin-secret'] = options.secret;
+  if (options.client) headers['x-hasura-client'] = options.client;
   return headers;
 }
 
 export function generateApolloClient(
-  options: IOptions,
+  options: IApolloClientGeneratorOptions,
   forwardingArguments?: {
     ApolloClient?: any;
     InMemoryCache?: any;
