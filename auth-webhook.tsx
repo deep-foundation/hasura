@@ -15,8 +15,9 @@ export const generateAuthWebhookNextjs = function generateAuthWebhookNextjs(
   const cors = Cors({ methods: ['GET', 'HEAD'] });
   return async (req, res) => {
     await corsMiddleware(req, res, cors);
-    var token = req?.headers?.['Authorization'];
-    if (typeof(token) === 'string') res.status(400).json({ error: '!token' });
+    const bearer = req?.headers['Authorization'] || req?.headers['authorization'];
+    const token = bearer.slice(7);
+    if (typeof(token) !== 'string') return res.status(400).json({ error: '!token' });
     res.json(await options.findUserByToken(token));
   };
 }
