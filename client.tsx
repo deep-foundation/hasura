@@ -77,12 +77,12 @@ export function generateApolloClient(
     defaultOptions: {
       watchQuery: {
         fetchPolicy: 'no-cache',
-        errorPolicy: 'all',
+        errorPolicy: 'ignore',
         ...forwardingArguments?.ApolloClient?.defaultOptions?.watchQuery,
       },
       query: {
         fetchPolicy: 'no-cache',
-        errorPolicy: 'all',
+        errorPolicy: 'ignore',
         ...forwardingArguments?.ApolloClient?.defaultOptions?.query,
       },
       ...forwardingArguments?.ApolloClient?.defaultOptions,
