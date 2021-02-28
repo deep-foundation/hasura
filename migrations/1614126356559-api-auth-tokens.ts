@@ -22,9 +22,79 @@ export const up = async () => {
       name: 'hasura_example_auth_tokens',
     },
   });
+  await api.query({
+    type: 'create_array_relationship',
+    args: {
+      table: 'hasura_example_auth_users',
+      name: 'tokens',
+      using: {
+        manual_configuration: {
+          remote_table: 'hasura_example_auth_tokens',
+          column_mapping: {
+            id: 'user_id',
+          },
+        },
+      },
+    },
+  });
+  await api.query({
+    type: 'create_object_relationship',
+    args: {
+      table: 'hasura_example_auth_tokens',
+      name: 'user',
+      using: {
+        manual_configuration: {
+          remote_table: 'hasura_example_auth_users',
+          column_mapping: {
+            user_id: 'id',
+          },
+        },
+      },
+    },
+  });
+  await api.query({
+    type: 'create_select_permission',
+    args: {
+      table: 'hasura_example_auth_tokens',
+      role: 'guest',
+      permission: {
+        columns: '*',
+        filter: {},
+        limit: 999,
+        allow_aggregations: true
+      }
+    }
+  });
+  await api.query({
+    type: 'create_select_permission',
+    args: {
+      table: 'hasura_example_auth_tokens',
+      role: 'user',
+      permission: {
+        columns: '*',
+        filter: {},
+        limit: 999,
+        allow_aggregations: true
+      }
+    }
+  });
 };
 
 export const down = async () => {
+  await api.query({
+    type: 'drop_relationship',
+    args: {
+      table: 'hasura_example_auth_tokens',
+      relationship: 'user',
+    },
+  });
+  await api.query({
+    type: 'drop_relationship',
+    args: {
+      table: 'hasura_example_auth_users',
+      relationship: 'tokens',
+    },
+  });
   await api.query({
     type: 'untrack_table',
     args: {

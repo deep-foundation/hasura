@@ -9,7 +9,7 @@ const api = new HasuraApi({
 
 export const up = async () => {
   await api.sql(sql`
-    CREATE TABLE public.hasura_example_auth_users (id integer);
+    CREATE TABLE public.hasura_example_auth_users (id integer, role text);
     CREATE SEQUENCE hasura_example_auth_users_id_seq
     AS integer START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
     ALTER SEQUENCE hasura_example_auth_users_id_seq OWNED BY public.hasura_example_auth_users.id;
@@ -21,6 +21,32 @@ export const up = async () => {
       schema: 'public',
       name: 'hasura_example_auth_users',
     },
+  });
+  await api.query({
+    type: 'create_select_permission',
+    args: {
+      table: 'hasura_example_auth_users',
+      role: 'guest',
+      permission: {
+        columns: '*',
+        filter: {},
+        limit: 999,
+        allow_aggregations: true
+      }
+    }
+  });
+  await api.query({
+    type: 'create_select_permission',
+    args: {
+      table: 'hasura_example_auth_users',
+      role: 'user',
+      permission: {
+        columns: '*',
+        filter: {},
+        limit: 999,
+        allow_aggregations: true
+      }
+    }
   });
 };
 
