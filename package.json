@@ -8,9 +8,9 @@
     "export": "next export",
     "start": "next start",
     "gh-pages": "npm run build; npm run export; rm -rf ../hasura-gh-pages/*; mv ./out/* ../hasura-gh-pages/; rm -rf out",
-    "migrate": "export $(grep -v '^#' .env | xargs); export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); yes | DEBUG='*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "unmigrate": "export $(grep -v '^#' .env | xargs); export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); yes | DEBUG='*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "gitpod": "export $(grep -v '^#' .env | xargs); export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export HASURA_PATH=$(echo $(gp url 8080) | awk -F[/:] '{print $4}'); export HASURA_SSL=1; export PORT=3001; npx next dev -p $PORT"
+    "migrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "unmigrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "gitpod": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export HASURA_PATH=$(echo $(gp url 8080) | awk -F[/:] '{print $4}'); export HASURA_SSL=1; export PORT=3001; export $(grep -v '^#' .env | xargs); npx next dev -p $PORT"
   },
   "dependencies": {
     "@deepcase/hasura": "^0.0.6",
