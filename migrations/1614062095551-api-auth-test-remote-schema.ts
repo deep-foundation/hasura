@@ -6,6 +6,8 @@ const api = new HasuraApi({
   secret: process.env.MIGRATIONS_HASURA_SECRET,
 });
 
+console.log(`${process.env.MIGRATIONS_EXAMPLE_URL}/api/auth/test-rs`);
+
 export const up = async () => {
   await api.query({
     type: 'add_remote_schema',

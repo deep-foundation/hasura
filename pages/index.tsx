@@ -9,7 +9,7 @@ import { useQuery, useSubscription } from '@apollo/react-hooks';
 function useDemoTokenController() {
   return useLocalStore('demo-token', 'demo');
 }
-function DemoTokenProvider({ children }: { children?: any }) {
+export function DemoTokenProvider({ children }: { children?: any }) {
   const [token, setToken] = useDemoTokenController();
   return <TokenContext.Provider value={token}>{children}</TokenContext.Provider>
 }

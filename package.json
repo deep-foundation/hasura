@@ -8,22 +8,32 @@
     "export": "next export",
     "start": "next start",
     "gh-pages": "npm run build; npm run export; rm -rf ../hasura-gh-pages/*; mv ./out/* ../hasura-gh-pages/; rm -rf out",
-    "migrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "unmigrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "gitpod": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; MIGRATIONS_EXAMPLE_URL=$(echo $(gp url 3001) | awk -F[/:] '{print $4}'); export HASURA_PATH=$(echo $(gp url 8080) | awk -F[/:] '{print $4}'); export HASURA_SSL=1; export PORT=3001; export $(grep -v '^#' .env | xargs); npx next dev -p $PORT"
+    "migrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "unmigrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "gitpod": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export HASURA_PATH=$(echo $(gp url 8080) | awk -F[/:] '{print $4}'); export HASURA_SSL=1; export PORT=3001; export $(grep -v '^#' .env | xargs); npx next dev -p $PORT"
   },
   "dependencies": {
     "@deepcase/hasura": "^0.0.6",
     "@deepcase/react-hasura": "^0.0.1",
     "@deepcase/store": "^0.0.31",
+    "@material-ui/core": "^4.11.3",
     "apollo-boost": "^0.4.9",
     "apollo-server": "^2.21.0",
+    "color-hash": "^1.0.3",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^6.0.2",
     "graphql-tag": "^2.11.0",
     "next": "10.0.7",
+    "normalize.css": "^8.0.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-force-graph": "^1.37.6",
+    "react-force-graph-2d": "^1.19.0",
+    "react-force-graph-3d": "^1.18.9",
+    "react-force-graph-ar": "^1.4.6",
+    "react-force-graph-vr": "^1.13.6",
+    "three": "^0.125.2",
+    "three-vrcontroller-module": "^1.0.5"
   },
   "devDependencies": {
     "@types/react": "^17.0.2"
