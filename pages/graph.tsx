@@ -13,6 +13,7 @@ import 'three-vrcontroller-module';
 
 import { DemoTokenProvider } from './index';
 import { useLocalStore, LocalStoreProvider } from '@deepcase/store/local';
+import { NODES, INSERT_NODES, UPDATE_NODES, DELETE_NODES } from '../imports/gql';
 
 const ForceGraph2D = dynamic(() => import('react-force-graph').then(m => m.ForceGraph2D), { ssr: false });
 const ForceGraph3D = dynamic(() => import('react-force-graph').then(m => m.ForceGraph3D), { ssr: false });
@@ -22,11 +23,6 @@ const ForceGraphAR = dynamic(() => import('react-force-graph').then(m => m.Force
 const colorHash = new ColorHash();
 
 const modes = { ForceGraph2D, ForceGraph3D, ForceGraphVR, ForceGraphAR };
-
-export const NODES = gql`subscription NODES { nodes: hasura_example_nodes { id type_id from_id to_id } }`;
-export const INSERT_NODES = gql`mutation INSERT_NODES($objects: [hasura_example_nodes_insert_input!]!) { insert_nodes: insert_hasura_example_nodes(objects: $objects) { returning { id type_id from_id to_id } } }`;
-export const UPDATE_NODES = gql`mutation UPDATE_NODES($set: hasura_example_nodes_set_input, $where: hasura_example_nodes_bool_exp!) { update_nodes: update_hasura_example_nodes(_set: $set, where: $where) { returning { id type_id from_id to_id } } }`;
-export const DELETE_NODES = gql`mutation DELETE_NODES($where: hasura_example_nodes_bool_exp!) { delete_nodes: delete_hasura_example_nodes(where: $where) { returning { id type_id from_id to_id } } }`;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -82,6 +78,7 @@ export function PageConnected() {
         linkDirectionalArrowLength={3.5}
         linkDirectionalArrowRelPos={1}
         linkCurvature={0.25}
+        onBackgroundClick={() => setSelectedNode()}
         onNodeClick={async (node) => {
           if (operation) {
             if (operation === 'from') {

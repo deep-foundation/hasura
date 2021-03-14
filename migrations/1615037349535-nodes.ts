@@ -1,14 +1,63 @@
 import { HasuraApi } from '@deepcase/hasura/api';
 import { sql } from '@deepcase/hasura/sql';
 
-const api = new HasuraApi({
+export const api = new HasuraApi({
   path: process.env.MIGRATIONS_HASURA_PATH,
   ssl: !!+process.env.MIGRATIONS_HASURA_SSL,
   secret: process.env.MIGRATIONS_HASURA_SECRET,
 });
 
-const SCHEMA = 'public';
-const GRAPH_TABLE = 'hasura_example_nodes';
+export const SCHEMA = 'public';
+export const GRAPH_TABLE = 'hasura_example_nodes';
+
+export const permissions = async (table) => {
+  await api.query({
+    type: 'create_select_permission',
+    args: {
+      table: table,
+      role: 'guest',
+      permission: {
+        columns: '*',
+        filter: {},
+        limit: 999,
+        allow_aggregations: true
+      }
+    }
+  });
+  await api.query({
+    type: 'create_insert_permission',
+    args: {
+      table: table,
+      role: 'guest',
+      permission: {
+        check: {},
+        columns: '*',
+      }
+    }
+  });
+  await api.query({
+    type: 'create_update_permission',
+    args: {
+      table: table,
+      role: 'guest',
+      permission: {
+        columns: '*',
+        filter: {},
+        check: {},
+      }
+    }
+  });
+  await api.query({
+    type: 'create_delete_permission',
+    args: {
+      table: table,
+      role: 'guest',
+      permission: {
+        filter: {},
+      }
+    }
+  });
+};
 
 export const up = async () => {
   await api.sql(sql`
@@ -25,52 +74,7 @@ export const up = async () => {
       name: GRAPH_TABLE,
     },
   });
-  await api.query({
-    type: 'create_select_permission',
-    args: {
-      table: GRAPH_TABLE,
-      role: 'guest',
-      permission: {
-        columns: '*',
-        filter: {},
-        limit: 999,
-        allow_aggregations: true
-      }
-    }
-  });
-  await api.query({
-    type: 'create_insert_permission',
-    args: {
-      table: GRAPH_TABLE,
-      role: 'guest',
-      permission: {
-        check: {},
-        columns: '*',
-      }
-    }
-  });
-  await api.query({
-    type: 'create_update_permission',
-    args: {
-      table: GRAPH_TABLE,
-      role: 'guest',
-      permission: {
-        columns: '*',
-        filter: {},
-        check: {},
-      }
-    }
-  });
-  await api.query({
-    type: 'create_delete_permission',
-    args: {
-      table: GRAPH_TABLE,
-      role: 'guest',
-      permission: {
-        filter: {},
-      }
-    }
-  });
+  await permissions(GRAPH_TABLE);
   await api.query({
     type: 'create_object_relationship',
     args: {
