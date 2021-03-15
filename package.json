@@ -33,8 +33,9 @@
     "package:build": "npx tsc --project tsconfig.json",
     "package:unbuild": "rm -f ./*.js; rm -f ./*.js.map; rm -f ./*.d.ts",
     "package:publish": "npm run package:build; npm publish --access public; npm run package:unbuild",
-    "docker-local": "(sudo apt install net-tools; export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1); cd ./local; docker-compose up -d)",
-    "gitpod": "(export $(grep -v '^#' .env | xargs); export AUTH_WEBHOOK=$(gp url 3001)/api/auth/webhook; npm run docker-local)"
+    "docker-local": "(export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1); cd ./local; docker-compose up -d)",
+    "gitpod": "((yes | sudo apt install net-tools); export AUTH_WEBHOOK=$(gp url 3001)/api/auth/webhook; export $(grep -v '^#' .env | xargs); npm run docker-local)",
+    "local": "(export AUTH_WEBHOOK=http://dockerhost:3001/api/auth/webhook; export $(grep -v '^#' .env | xargs); npm run docker-local)"
   },
   "devDependencies": {
     "@types/node": "^14.0.23",
