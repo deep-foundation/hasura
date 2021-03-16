@@ -1,6 +1,6 @@
 import { generateAuthWebhookNextjs } from '@deepcase/hasura/auth-webhook';
 import { generateApolloClient } from '@deepcase/hasura/client';
-import { gql } from 'graphql-tag';
+import gql from 'graphql-tag';
 
 const client = generateApolloClient({
   client: 'hasura-example-api-auth-webhook',

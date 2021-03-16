@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import gql from 'graphql-tag';
 
 export const NODES = gql`subscription NODES { nodes: hasura_example_nodes { id type_id from_id to_id } }`;
 export const INSERT_NODES = gql`mutation INSERT_NODES($objects: [hasura_example_nodes_insert_input!]!) { insert_nodes: insert_hasura_example_nodes(objects: $objects) { returning { id type_id from_id to_id } } }`;

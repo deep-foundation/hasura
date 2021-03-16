@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { TokenContext, useToken } from '@deepcase/react-hasura/token-context';
 import { ApolloClientTokenizedProvider } from '@deepcase/react-hasura/apollo-client-tokenized-provider';
 import { LocalStoreProvider, useLocalStore } from '@deepcase/store/local';
-import { gql } from 'graphql-tag';
+import gql from 'graphql-tag';
 import { useQuery, useSubscription } from '@apollo/react-hooks';
 
 function useDemoTokenController() {

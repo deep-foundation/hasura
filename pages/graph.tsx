@@ -1,6 +1,6 @@
 import { useSubscription, useMutation } from '@apollo/react-hooks';
 import { ApolloClientTokenizedProvider } from '@deepcase/react-hasura/apollo-client-tokenized-provider';
-import { gql } from 'graphql-tag';
+import gql from 'graphql-tag';
 import React, { useState, useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { makeStyles } from '@material-ui/core';
