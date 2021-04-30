@@ -58,7 +58,7 @@ export default function Page() {
   return (
     <LocalStoreProvider>
       <DemoTokenProvider>
-        <ApolloClientTokenizedProvider options={{ client: 'hasura-example-client', path: `${process.env.HASURA_PATH}/v1/graphql`, ssl: !!+process.env.HASURA_SSL, ws: !!process?.browser }}>
+        <ApolloClientTokenizedProvider options={{ client: 'hasura-example-client', path: `${process.env.NEXT_PUBLIC_HASURA_PATH}/v1/graphql`, ssl: !!+process.env.NEXT_PUBLIC_HASURA_SSL, ws: !!process?.browser }}>
           {!!process.browser && <PageConnected/>}
         </ApolloClientTokenizedProvider>
       </DemoTokenProvider>
