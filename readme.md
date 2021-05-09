@@ -5,7 +5,7 @@
 ## install
 
 ```
-npm i
+npm ci
 ```
 
 Create `.env` file:
