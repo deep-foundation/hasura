@@ -27,43 +27,6 @@ export const up = async () => {
       name: TYPES_TABLE,
     },
   });
-  await permissions(GRAPH_TABLE);
-  await api.query({
-    type: 'create_object_relationship',
-    args: {
-      table: GRAPH_TABLE,
-      name: '_type',
-      using: {
-        manual_configuration: {
-          remote_table: {
-            schema: SCHEMA,
-            name: TYPES_TABLE,
-          },
-          column_mapping: {
-            id: 'node_id',
-          },
-        },
-      },
-    },
-  });
-  await api.query({
-    type: 'create_array_relationship',
-    args: {
-      table: TYPES_TABLE,
-      name: '_node',
-      using: {
-        manual_configuration: {
-          remote_table: {
-            schema: SCHEMA,
-            name: GRAPH_TABLE,
-          },
-          column_mapping: {
-            node_id: 'id',
-          },
-        },
-      },
-    },
-  });
 };
 
 export const down = async () => {
@@ -72,8 +35,11 @@ export const down = async () => {
     args: {
       table: {
         schema: SCHEMA,
-        name: GRAPH_TABLE,
+        name: TYPES_TABLE,
       },
     },
   });
+  await api.sql(sql`
+    DROP TABLE ${SCHEMA}."${TYPES_TABLE}";
+  `);
 };

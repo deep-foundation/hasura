@@ -39,5 +39,5 @@ const resolvers = {
 const context = ({ req }) => {
   return { headers: req.headers };
 };
-
+console.log('JWT');
 module.exports = generateRemoteSchema({ typeDefs, resolvers, context, path: '/api/auth/jwt' });

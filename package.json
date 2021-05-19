@@ -3,17 +3,14 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "dev": "next dev -p $PORT",
+    "unsafe-dev": "next dev -p $PORT",
     "build": "next build",
     "export": "next export",
     "start": "next start",
     "gh-pages": "npm run build; npm run export; rm -rf ../hasura-gh-pages/*; mv ./out/* ../hasura-gh-pages/; rm -rf out",
-    "gitpod-migrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "gitpod-unmigrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "gitpod": "export JWT_SECRET='3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R'; export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=$(gp url 3001); export NEXT_PUBLIC_HASURA_PATH=$(echo $(gp url 8080) | awk -F[/:] '{print $4}'); export NEXT_PUBLIC_HASURA_SSL=1; export PORT=3001; export $(grep -v '^#' .env | xargs); npx next dev -p $PORT",
-    "local-migrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=http://localhost:3001; export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "local-unmigrate": "export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=http://localhost:3001; export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'",
-    "local": "export JWT_SECRET='3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R'; export MIGRATIONS_HASURA_PATH=localhost:8080; export MIGRATIONS_HASURA_SSL=0; export MIGRATIONS_HASURA_SECRET=myadminsecretkey; export MIGRATIONS_EXAMPLE_URL=http://localhost:3001; export NEXT_PUBLIC_HASURA_PATH=localhost:8080; export NEXT_PUBLIC_HASURA_SSL=0; export PORT=3001; export $(grep -v '^#' .env | xargs); npx next dev -p $PORT"
+    "dev": "export $(grep -v '^#' .env | xargs); npm run unsafe-dev",
+    "migrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate up --compiler='ts:@deepcase/hasura/compiler/index.js'",
+    "unmigrate": "export $(grep -v '^#' .env | xargs); yes | DEBUG='deepcase:*' npx migrate down --compiler='ts:@deepcase/hasura/compiler/index.js'"
   },
   "dependencies": {
     "@deepcase/hasura": "^0.0.6",
