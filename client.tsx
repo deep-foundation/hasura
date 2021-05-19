@@ -1,5 +1,6 @@
 import { HttpLink, InMemoryCache } from 'apollo-boost';
 import { ApolloClient } from '@apollo/react-hooks';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
@@ -60,9 +61,18 @@ export function generateApolloClient(
     return forward(operation);
   });
 
-  const link = options.ws
-    ? concat(wsLink, httpLink)
-    : httpLink;
+  const link = !options.ws
+    ? httpLink
+    : split(
+        ({ query }) => {
+          // return true;
+          // if you need ws only for subscriptions:
+          const def = getMainDefinition(query);
+          return def?.kind === 'OperationDefinition' && def?.operation === 'subscription';
+        },
+        wsLink,
+        httpLink,
+      );
 
   return new ApolloClient({
     ssrMode: true,
