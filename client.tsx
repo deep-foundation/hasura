@@ -24,6 +24,10 @@ export function generateHeaders(options: IApolloClientGeneratorOptions) {
   return headers;
 }
 
+export interface IApolloClient<T> extends ApolloClient<T> {
+  jwt_token?: string;
+}
+
 export function generateApolloClient(
   options: IApolloClientGeneratorOptions,
   forwardingArguments?: {
@@ -74,7 +78,7 @@ export function generateApolloClient(
         httpLink,
       );
 
-  return new ApolloClient({
+  const client: IApolloClient<any> = new ApolloClient({
     ssrMode: true,
     link: concat(authMiddleware, link),
     connectToDevTools: true,
@@ -98,4 +102,8 @@ export function generateApolloClient(
       ...forwardingArguments?.ApolloClient?.defaultOptions,
     },
   });
+
+  client.jwt_token = options.token;
+
+  return client;
 }
