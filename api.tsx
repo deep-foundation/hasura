@@ -12,6 +12,9 @@ export interface HasuraApiOptions {
   ssl: boolean;
   secret: string;
 }
+export interface HasuraApiQueryOptions {
+  route?: string;
+}
 
 export class HasuraApi {
   options: HasuraApiOptions;
@@ -30,13 +33,24 @@ export class HasuraApi {
       args: {
         sql,
       },
-    })
+    }, {
+      route: '/v1/query',
+    });
   }
-  async query(data: any) {
+  explain(query: string) {
+    return this.query({
+      query: {
+        query
+      },
+    }, {
+      route: '/v1/graphql/explain',
+    });
+  }
+  async query(data: any, options: HasuraApiQueryOptions = { route: '/v1/query' }) {
     debug('query', data?.type);
     const result: HasuraAxiosResponse = await axios({
       method: 'post',
-      url: `http${this.options.ssl ? 's' : ''}://${this.options.path}/v1/query`,
+      url: `http${this.options.ssl ? 's' : ''}://${this.options.path}${options?.route}`,
       headers: {
         ...(this.options.secret ? { 'x-hasura-admin-secret': this.options.secret } : {}),
       },
