@@ -14,6 +14,7 @@
   "description": "",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@deepcase/materialized-path": "^0.0.9",
     "apollo-boost": "^0.4.9",
     "apollo-link": "^1.2.14",
     "apollo-link-ws": "^1.0.20",
