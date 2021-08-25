@@ -35,6 +35,7 @@ await api.query({
 ## client
 ```ts
 import { generateApolloClient } from '@deepcase/hasura/client';
+import { gql } from '@apollo/client';
 const client = generateApolloClient({ // all options are optional
   ws: true, // need to socket for subscriptions // recommended
   secret: 'adminSecretForRoot', // admin secret for root access // not need when token exists
@@ -44,4 +45,5 @@ const client = generateApolloClient({ // all options are optional
   headers: {}, // custom additional fields into headers
   initialStore: {},
 });
+client.query({ query: gql`{ links { id }}` }).then(result => console.log(result))
 ```
