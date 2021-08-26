@@ -1,5 +1,4 @@
-import { HttpLink, InMemoryCache } from 'apollo-boost';
-import { ApolloClient } from '@apollo/react-hooks';
+import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
