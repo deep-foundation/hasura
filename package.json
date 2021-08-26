@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -14,7 +14,7 @@
   "description": "",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
-    "@deepcase/materialized-path": "^0.0.10",
+    "@deepcase/materialized-path": "0.0.11",
     "apollo-boost": "^0.4.9",
     "apollo-link": "^1.2.14",
     "apollo-link-ws": "^1.0.20",
