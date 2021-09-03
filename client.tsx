@@ -74,11 +74,13 @@ export function generateApolloClient(
           return def?.kind === 'OperationDefinition' && def?.operation === 'subscription';
         },
         wsLink,
+        // @ts-ignore
         httpLink,
       );
 
   const client: IApolloClient<any> = new ApolloClient({
     ssrMode: true,
+    // @ts-ignore
     link: concat(authMiddleware, link),
     connectToDevTools: true,
     cache: new InMemoryCache({
