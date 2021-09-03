@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -28,7 +28,9 @@
     "migrate": "^1.7.0",
     "node-fetch": "^2.6.1",
     "react": "^17.0.1",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "@types/node": "^14.17.14",
+    "@types/react": "^17.0.19"
   },
   "scripts": {
     "package:build": "npx tsc --project tsconfig.json",
@@ -38,8 +40,6 @@
     "docker": "(export JWT_SECRET='{\"type\":\"HS256\", \"key\": \"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\"}'; export $(grep -v '^#' .env | xargs); npm run docker-local)"
   },
   "devDependencies": {
-    "@types/node": "^14.0.23",
-    "@types/react": "^17.0.2",
     "pre-commit": "^1.2.2",
     "typescript": "^3.9.7"
   }
