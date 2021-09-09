@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -8,9 +8,6 @@
     "type": "git",
     "url": "ssh://git@github.com/deepcase/hasura.git"
   },
-  "pre-commit": [
-    "build"
-  ],
   "description": "",
   "dependencies": {
     "@apollo/client": "^3.4.9",
