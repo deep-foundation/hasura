@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -34,7 +34,7 @@
     "package:unbuild": "rm -f ./*.js; rm -f ./*.js.map; rm -f ./*.d.ts",
     "package:publish": "npm run package:build; npm publish --access public; npm run package:unbuild",
     "docker-local": "export DOCKERHOST=$(ifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1); cd ./local; docker-compose up -d",
-    "docker": "(export JWT_SECRET='{\"type\":\"HS256\", \"key\": \"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\"}'; export $(grep -v '^#' .env | xargs); npm run docker-local)"
+    "docker": "export JWT_SECRET='{\"type\":\"HS256\", \"key\": \"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\"}'; export $(grep -v '^#' .env | xargs); npm run docker-local"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",
