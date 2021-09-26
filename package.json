@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
