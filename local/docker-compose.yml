@@ -12,21 +12,15 @@ services:
       PGGSSENCMODE: disable
       PGSSLMODE: disable
       PGREQUIRESSL: 0
-    ports:
-      - "15432:5432"
   graphql-engine:
     image: hasura/graphql-engine:v1.3.2
     ports:
     - "8080:8080"
-    extra_hosts:
-      - "dockerhost:$DOCKERHOST"
     depends_on:
     - "postgres"
-    links:
-      - "postgres:postgres"
     restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@dockerhost:15432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_LOG_LEVEL: "debug"
