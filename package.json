@@ -1,6 +1,6 @@
 {
   "name": "@deepcase/hasura",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "license": "ISC",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deepcase/hasura",
@@ -21,7 +21,6 @@
     "axios": "^0.21.1",
     "babel-register": "^6.26.0",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "debug": "^4.3.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -36,7 +35,7 @@
     "package:unbuild": "rimraf ./*.js && rimraf ./*.js.map && rimraf ./*.d.ts",
     "package:publish": "npm run package:build && npm publish --access public && npm run package:unbuild",
     "docker-local": "cd ./local && docker-compose up -d && cd ../",
-    "docker": "cross-env JWT_SECRET='{\\\"type\\\":\\\"HS256\\\",\\\"key\\\":\\\"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\\\"}' npm run docker-local"
+    "docker": "npm run docker-local"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",
