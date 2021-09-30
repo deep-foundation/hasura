@@ -67,8 +67,12 @@ const client = generateApolloClient({ // all options are optional
 });
 ```
 
-You can also specify relative not locally in your code, but using an ENV variable `DEEP_FOUNDATION_HASURA_RELATIVE`.
+You can also specify relative not locally in your code, but using an ENV variable `DEEP_FOUNDATION_HASURA_RELATIVE` or `NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE`.
 
 ```sh
 export DEEP_FOUNDATION_HASURA_RELATIVE = 1;
+```
+OR
+```sh
+export NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE = 1;
 ```
