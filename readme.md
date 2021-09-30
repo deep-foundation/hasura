@@ -41,9 +41,34 @@ const client = generateApolloClient({ // all options are optional
   secret: 'adminSecretForRoot', // admin secret for root access // not need when token exists
   token: 'tokenFromCookiesOrLocalStorage', // token for auth webhook auth // ignored when secret exists
   ssl: true; // auto http/https ws/wss protocol
-  path: 'hasura.domain.com', // link to hasura location
+  path: 'hasura.domain.com/path', // link to hasura location
   headers: {}, // custom additional fields into headers
   initialStore: {},
+  relative: false, // optional
 });
 client.query({ query: gql`{ links { id }}` }).then(result => console.log(result))
+```
+
+If you need to specify an absolute path as `protocol://domain.zone/path` to hasura, you **must** pass these two options: `path` and `ssl`
+
+```ts
+const client = generateApolloClient({ // all options are optional
+  ssl: true;
+  path: 'hasura.domain.com/path',
+});
+```
+
+If you need to specify relative path as `/path` to hasura, you must enable the relative mode with the `relative` option. In this case, the `ssl` option is ignored. This can be useful when your build is with some proxy.
+
+```ts
+const client = generateApolloClient({ // all options are optional
+  relative: true,
+  path: 'hasura.domain.com/path',
+});
+```
+
+You can also specify relative not locally in your code, but using an ENV variable `DEEP_FOUNDATION_HASURA_RELATIVE`.
+
+```sh
+export DEEP_FOUNDATION_HASURA_RELATIVE = 1;
 ```

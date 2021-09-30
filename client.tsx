@@ -4,6 +4,7 @@ import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 
+const DEEP_FOUNDATION_HASURA_RELATIVE: boolean | undefined = ((r) => r ? !!+r : undefined)(process.env.DEEP_FOUNDATION_HASURA_RELATIVE);
 export interface IApolloClientGeneratorOptions {
   initialStore?: any;
   token?: string;
@@ -13,6 +14,7 @@ export interface IApolloClientGeneratorOptions {
   path?: string;
   headers?: any;
   ws?: boolean;
+  relative?: boolean;
 }
 
 export function generateHeaders(options: IApolloClientGeneratorOptions) {
@@ -34,10 +36,11 @@ export function generateApolloClient(
     InMemoryCache?: any;
   },
 ): ApolloClient<any> {
+  const isRelative = typeof(options?.relative) === 'boolean' ? options.relative : typeof(DEEP_FOUNDATION_HASURA_RELATIVE) === 'boolean' ? DEEP_FOUNDATION_HASURA_RELATIVE : false;
   const headers = generateHeaders(options);
 
   const httpLink = new HttpLink({
-    uri: `http${options.ssl ? 's' : ''}://${options.path || ''}`,
+    uri: `${isRelative ? '' : `http${options.ssl ? 's' : ''}://`}${options.path || ''}`,
     // @ts-ignore
     fetch,
     headers,
@@ -45,7 +48,7 @@ export function generateApolloClient(
 
   const wsLink = options.ws
     ? new WebSocketLink({
-      uri: `ws${options.ssl ? 's' : ''}://${options.path || ''}`,
+      uri: `${isRelative ? '' : `ws${options.ssl ? 's' : ''}://`}${options.path || ''}`,
       options: {
         lazy: true,
         reconnect: true,
