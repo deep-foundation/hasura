@@ -3,6 +3,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
+import path from 'path';
 
 const DEEP_FOUNDATION_HASURA_RELATIVE: boolean | undefined = ((r) => r ? !!+r : undefined)(process.env.DEEP_FOUNDATION_HASURA_RELATIVE);
 const NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE: boolean | undefined = ((r) => r ? !!+r : undefined)(process.env.NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE);
@@ -45,7 +46,7 @@ export function generateApolloClient(
   const headers = generateHeaders(options);
 
   const httpLink = new HttpLink({
-    uri: `${isRelative ? '' : `http${options.ssl ? 's' : ''}://`}${options.path || ''}`,
+    uri: path.normalize(`${isRelative ? '/' : `http${options.ssl ? 's' : ''}://`}${options.path || ''}`),
     // @ts-ignore
     fetch,
     headers,
@@ -53,7 +54,7 @@ export function generateApolloClient(
 
   const wsLink = options.ws
     ? new WebSocketLink({
-      uri: `${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}/` : '') : `ws${options.ssl ? 's' : ''}://`}${options.path || ''}`,
+      uri: path.normalize(`${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}/` : '/') : `ws${options.ssl ? 's' : ''}://`}${options.path || ''}`),
       options: {
         lazy: true,
         reconnect: true,
