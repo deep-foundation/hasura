@@ -58,7 +58,7 @@ const client = generateApolloClient({ // all options are optional
 });
 ```
 
-If you need to specify relative path as `/path` to hasura, you must enable the relative mode with the `relative` option. In this case, the `ssl` option is ignored. This can be useful when your build is with some proxy.
+If you need to specify relative path as `/path` to hasura, you must enable the relative mode with the `relative` option. In this case, the `ssl` option is ignored in `http` client, but used in `ws`. This can be useful when your build is with some proxy.
 
 ```ts
 const client = generateApolloClient({ // all options are optional
@@ -76,3 +76,4 @@ OR
 ```sh
 export NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE = 1;
 ```
+

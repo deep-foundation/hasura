@@ -32,6 +32,8 @@ export interface IApolloClient<T> extends ApolloClient<T> {
   jwt_token?: string;
 }
 
+const host = typeof(window) === 'object' ? window.location.host : '';
+
 export function generateApolloClient(
   options: IApolloClientGeneratorOptions,
   forwardingArguments?: {
@@ -51,7 +53,7 @@ export function generateApolloClient(
 
   const wsLink = options.ws
     ? new WebSocketLink({
-      uri: `${isRelative ? '' : `ws${options.ssl ? 's' : ''}://`}${options.path || ''}`,
+      uri: `${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}/` : '') : `ws${options.ssl ? 's' : ''}://`}${options.path || ''}`,
       options: {
         lazy: true,
         reconnect: true,
