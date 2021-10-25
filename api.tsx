@@ -11,6 +11,7 @@ export interface HasuraApiOptions {
   path: string;
   ssl: boolean;
   secret: string;
+  errorHandler: (result) => any;
 }
 export interface HasuraApiQueryOptions {
   route?: string;
@@ -18,8 +19,9 @@ export interface HasuraApiQueryOptions {
 
 export class HasuraApi {
   options: HasuraApiOptions;
+  defaultErrorHandler = (result) => console.log('error', result?.error, result?.data);
   constructor(options: HasuraApiOptions) {
-    this.options = options;
+    this.options = { ...options };
   }
   validateStatus() { return true };
   getError(result: AxiosResponse): null | string {
@@ -58,7 +60,7 @@ export class HasuraApi {
       validateStatus: this.validateStatus,
     });
     result.error = this.getError(result);
-    if (result.error) debug('error', result?.error, result?.data);
+    if (result.error) this.options.errorHandler(result);
     return result;
   }
   async metadata(data: any, options: HasuraApiQueryOptions = { route: '/v1/metadata' }) {
