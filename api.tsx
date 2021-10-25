@@ -61,4 +61,7 @@ export class HasuraApi {
     if (result.error) debug('error', result?.error, result?.data);
     return result;
   }
+  async metadata(data: any, options: HasuraApiQueryOptions = { route: '/v1/metadata' }) {
+    return await this.query(data, options);
+  }
 }
