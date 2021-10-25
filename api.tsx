@@ -11,7 +11,7 @@ export interface HasuraApiOptions {
   path: string;
   ssl: boolean;
   secret: string;
-  errorHandler: (result) => any;
+  errorHandler?: (result) => any;
 }
 export interface HasuraApiQueryOptions {
   route?: string;
@@ -21,7 +21,7 @@ export class HasuraApi {
   options: HasuraApiOptions;
   defaultErrorHandler = (result) => console.log('error', result?.error, result?.data);
   constructor(options: HasuraApiOptions) {
-    this.options = { ...options };
+    this.options = { errorHandler: this.defaultErrorHandler, ...options };
   }
   validateStatus() { return true };
   getError(result: AxiosResponse): null | string {
