@@ -1,12 +1,12 @@
 {
-  "name": "@deepcase/hasura",
-  "version": "0.0.33",
-  "license": "ISC",
+  "name": "@deep-foundation/hasura",
+  "version": "0.0.1",
+  "license": "MIT",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
-  "homepage": "https://github.com/deepcase/hasura",
+  "homepage": "https://github.com/deep-foundation/hasura",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/deepcase/hasura.git"
+    "url": "ssh://git@github.com/deep-foundation/hasura.git"
   },
   "description": "",
   "dependencies": {
