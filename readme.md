@@ -1,11 +1,11 @@
-# deepcase hasura
+# deep-foundation hasura
 
-[![npm version](https://badge.fury.io/js/%40deepcase%2Fhasura.svg)](https://badge.fury.io/js/%40deepcase%2Fhasura) [![example](https://badgen.net/badge/example/gh-pages/gray)](https://deepcase.github.io/hasura/) [![develop deepcase](https://badgen.net/badge/develop/deepcase)](https://github.com/deepcase/deepcase)
+[![npm version](https://badge.fury.io/js/%40deep-foundation%2Fhasura.svg)](https://badge.fury.io/js/%40deep-foundation%2Fhasura) [![example](https://badgen.net/badge/example/gh-pages/gray)](https://deep-foundation.github.io/hasura/) [![develop deep-foundation](https://badgen.net/badge/develop/deep-foundation)](https://github.com/deep-foundation/dev)
 
 ## api
 
 ```ts
-import { HasuraApi } from '@deepcase/hasura/api';
+import { HasuraApi } from '@deep-foundation/hasura/api';
 
 const api = new HasuraApi({
   path: 'hasura.domain.com',
@@ -16,7 +16,7 @@ const api = new HasuraApi({
 
 > sql template literal for ide highlighting
 ```ts
-import { sql } from '@deepcase/hasura/sql';
+import { sql } from '@deep-foundation/hasura/sql';
 
 await api.sql(sql`SELECT * FROM mytable`);
 ```
@@ -34,7 +34,7 @@ await api.query({
 
 ## client
 ```ts
-import { generateApolloClient } from '@deepcase/hasura/client';
+import { generateApolloClient } from '@deep-foundation/hasura/client';
 import gql from 'graphql-tag';
 const client = generateApolloClient({ // all options are optional
   ws: true, // need to socket for subscriptions // recommended
