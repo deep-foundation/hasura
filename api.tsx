@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import Debug from 'debug';
 
-const debug = Debug('deepcase:hasura');
+const debug = Debug('hasura');
 
 export interface HasuraAxiosResponse extends AxiosResponse {
   error?: string;
