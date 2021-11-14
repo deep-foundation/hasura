@@ -4,6 +4,7 @@ import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
+import * as ws from 'ws';
 
 const DEEP_FOUNDATION_HASURA_RELATIVE: boolean | undefined = ((r) => r ? !!+r : undefined)(process.env.DEEP_FOUNDATION_HASURA_RELATIVE);
 const NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE: boolean | undefined = ((r) => r ? !!+r : undefined)(process.env.NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE);
@@ -62,6 +63,7 @@ export function generateApolloClient(
           headers,
         }),
       },
+      webSocketImpl: ws,
     })
     : null;
 
