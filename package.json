@@ -1,6 +1,6 @@
 {
   "name": "@deep-foundation/hasura",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deep-foundation/hasura",
@@ -31,7 +31,7 @@
     "react": "^17.0.1",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
-    "ws": "^8.2.3"
+    "ws": "^7.5.6"
   },
   "scripts": {
     "package:build": "npx tsc --project tsconfig.json",
