@@ -41,6 +41,7 @@
     "docker": "cross-env JWT_SECRET=\"{\\\"type\\\":\\\"HS256\\\",\\\"key\\\":\\\"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\\\"}\" npm run docker-local"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "pre-commit": "^1.2.2",
     "typescript": "^3.9.7"
   }
