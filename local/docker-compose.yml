@@ -2,6 +2,8 @@ version: '3.6'
 services:
   postgres:
     image: postgres:12
+    networks:
+      - network
     ports:
     - "5432:5432"
     restart: always
@@ -16,6 +18,8 @@ services:
       PGREQUIRESSL: 0
   graphql-engine:
     image: hasura/graphql-engine:v2.0.10
+    networks:
+      - network
     ports:
     - "8080:8080"
     extra_hosts: ['host.docker.internal:host-gateway']
@@ -36,3 +40,6 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "link"
 volumes:
   db_data:
+networks:
+  network:
+    driver: bridge
