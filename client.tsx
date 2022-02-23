@@ -36,6 +36,8 @@ export function generateHeaders(options: IApolloClientGeneratorOptions) {
 
 export interface IApolloClient<T> extends ApolloClient<T> {
   jwt_token?: string;
+  path?: string;
+  ssl?: boolean;
 }
 
 const host = typeof(window) === 'object' ? window.location.host : '';
@@ -120,6 +122,8 @@ export function generateApolloClient(
   });
 
   client.jwt_token = options.token;
+  client.path = options.path;
+  client.ssl = options.ssl;
 
   return client;
 }
