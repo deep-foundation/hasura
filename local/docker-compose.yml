@@ -37,7 +37,7 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_GRAPHQL_JWT_SECRET: '${JWT_SECRET}'
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: "true"
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "link"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "undefined"
 volumes:
   db_data:
 networks:
