@@ -51,6 +51,7 @@ export class HasuraApi {
   async query(data: any, options: HasuraApiQueryOptions = { route: '/v1/query' }) {
     debug('query', data?.type);
     const result: HasuraAxiosResponse = await axios({
+      timeout: 360000,
       method: 'post',
       url: `http${this.options.ssl ? 's' : ''}://${this.options.path}${options?.route}`,
       headers: {
