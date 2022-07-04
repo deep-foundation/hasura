@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   postgres:
-    image: postgres:12
+    image: deepf/pg12-plv8:deeplinks-70-menzorg
     networks:
       - network
     ports:
@@ -10,6 +10,9 @@ services:
     command: postgres -c max_connections=200 -c log_error_verbosity=verbose -c client_min_messages=DEBUG5 -c log_min_messages=DEBUG5 -c log_min_error_statement=DEBUG5 -c log_duration=true
     volumes:
     - db_data:/var/lib/postgresql/data
+    - type: bind
+      source: ./plv8.sql
+      target: /docker-entrypoint-initdb.d/plv8.sql
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgrespassword'
