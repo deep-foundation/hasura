@@ -10,12 +10,6 @@ services:
     command: postgres -c max_connections=200 -c log_error_verbosity=verbose -c client_min_messages=DEBUG5 -c log_min_messages=DEBUG5 -c log_min_error_statement=DEBUG5 -c log_duration=true
     volumes:
     - db_data:/var/lib/postgresql/data
-    - type: bind
-      source: ./plv8.sql
-      target: /docker-entrypoint-initdb.d/plv8.sql
-    - type: bind
-      source: ./storage.sql
-      target: /docker-entrypoint-initdb.d/storage.sql
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgrespassword'
@@ -53,17 +47,17 @@ services:
     ports:
       - '8000:8000'
     environment:
-      DEBUG: "true"
-      HASURA_METADATA: 1
-      HASURA_ENDPOINT: http://host.docker.internal:8080/v1
-      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      S3_ENDPOINT: http://host.docker.internal:9000
-      S3_ACCESS_KEY: minioaccesskey
-      S3_SECRET_KEY: miniosecretkey
-      S3_BUCKET: "default"
-      S3_ROOT_FOLDER: "default"
-      POSTGRES_MIGRATIONS: 1
-      POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:postgrespassword@host.docker.internal:5432/postgres?sslmode=disable
+      - 'DEBUG=true'
+      - 'HASURA_METADATA=1'
+      - 'HASURA_ENDPOINT=http://host.docker.internal:8080/v1'
+      - 'HASURA_GRAPHQL_ADMIN_SECRET=myadminsecretkey'
+      - 'S3_ENDPOINT=http://host.docker.internal:9000'
+      - 'S3_ACCESS_KEY=minioaccesskey'
+      - 'S3_SECRET_KEY=miniosecretkey'
+      - 'S3_BUCKET=default'
+      - 'S3_ROOT_FOLDER=default'
+      - 'POSTGRES_MIGRATIONS=0'
+      - 'POSTGRES_MIGRATIONS_SOURCE=postgres://postgres:postgrespassword@host.docker.internal:5432/postgres?sslmode=disable'
     command: serve
   minio:
     image: minio/minio
@@ -75,13 +69,10 @@ services:
       - '9000:9000'
       - '32765:32765'
     environment:
-      - MINIO_ROOT_USER=minioroot
-      - MINIO_ROOT_PASSWORD=minioroot
-      - 'MINIO_ACCESS_KEY=minioaccesskey'
-      - 'MINIO_SECRET_KEY=miniosecretkey'
-      - 'S3_BUCKET=hasura_files'
+      - 'MINIO_ROOT_USER=minioaccesskey'
+      - 'MINIO_ROOT_PASSWORD=miniosecretkey'
     entrypoint: sh
-    command: '-c ''mkdir -p /export/$${S3_bucket} && /opt/bin/minio server --address 0.0.0.0:9000 --console-address 0.0.0.0:32765 /export'''
+    command: '-c ''mkdir -p /export/default && /opt/bin/minio server --address 0.0.0.0:9000 --console-address 0.0.0.0:32765 /export'''
 volumes:
   db_data:
   storage_rules:
