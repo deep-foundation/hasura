@@ -45,7 +45,7 @@ services:
       - 'HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true'
       - 'HASURA_GRAPHQL_UNAUTHORIZED_ROLE=undefined'
   storage:
-    container_name: hasura-storage-storage
+    container_name: hasura-storage
     image: nhost/hasura-storage:0.2.3
     depends_on:
       - graphql-engine
