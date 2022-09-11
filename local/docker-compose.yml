@@ -48,6 +48,7 @@ services:
     restart: unless-stopped
     ports:
       - '8000:8000'
+    extra_hosts: ['host.docker.internal:host-gateway']
     environment:
       - 'DEBUG=true'
       - 'HASURA_METADATA=1'
