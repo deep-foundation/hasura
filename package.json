@@ -24,7 +24,7 @@
     "debug": "^4.3.4",
     "dotenv": "^8.2.0",
     "express": "^4.18.2",
-    "graphql": "^16.6.0",
+    "graphql": "^15.8.0",
     "migrate": "^1.8.0",
     "node-fetch": "^2.6.1",
     "normalize-url": "^7.2.0",
