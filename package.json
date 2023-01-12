@@ -13,7 +13,6 @@
     "@apollo/client": "^3.7.3",
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/server": "^4.3.0",
-    "@as-integrations/next": "^1.2.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "axios": "^1.2.2",
