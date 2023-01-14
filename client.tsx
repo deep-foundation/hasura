@@ -1,7 +1,7 @@
-import { HttpLink, InMemoryCache, ApolloClient, ApolloLink, concat, split } from '@apollo/client';
+import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { createClient } from "graphql-ws";
+import { ApolloLink, concat, split } from 'apollo-link';
+import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
 import Debug from 'debug';
@@ -65,17 +65,17 @@ export function generateApolloClient(
   });
 
   const wsLink = options.ws
-    ? new GraphQLWsLink(createClient(
-      {
-        url: `${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}` : '') : `ws${options.ssl ? 's' : ''}:/`}${path.normalize('/' + (options.path || ''))}`,
+    ? new WebSocketLink({
+      uri: `${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}` : '') : `ws${options.ssl ? 's' : ''}:/`}${path.normalize('/' + (options.path || ''))}`,
+      options: {
         lazy: true,
-        shouldRetry: () => true,
+        reconnect: true,
         connectionParams: () => ({
           headers,
         }),
-        webSocketImpl: ws,
-      }
-    ))
+      },
+      webSocketImpl: ws,
+    })
     : null;
 
   const authMiddleware = new ApolloLink((operation, forward) => {
