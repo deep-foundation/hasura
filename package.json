@@ -14,7 +14,6 @@
     "@apollo/react-hooks": "^4.0.0",
     "@types/node": "^14.17.14",
     "@types/react": "^17.0.19",
-    "apollo-server-micro": "^2.21.0",
     "axios": "^0.21.1",
     "babel-register": "^6.26.0",
     "cors": "^2.8.5",
