@@ -9,7 +9,7 @@
     "url": "ssh://git@github.com/deep-foundation/hasura.git"
   },
   "description": "",
-  "files": ["dist"],
+  "files": ["dist/**"],
   "dependencies": {
     "@apollo/client": "^3.5.5",
     "@apollo/react-hooks": "^4.0.0",
