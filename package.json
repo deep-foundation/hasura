@@ -1,6 +1,6 @@
 {
   "name": "@deep-foundation/hasura",
-  "version": "0.0.36",
+  "version": "0.0.34",
   "license": "Unlicense",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deep-foundation/hasura",
@@ -9,7 +9,6 @@
     "url": "ssh://git@github.com/deep-foundation/hasura.git"
   },
   "description": "",
-  "files": ["dist/**"],
   "dependencies": {
     "@apollo/client": "^3.5.5",
     "@apollo/react-hooks": "^4.0.0",
