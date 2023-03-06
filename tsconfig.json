@@ -5,6 +5,8 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "removeComments": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",

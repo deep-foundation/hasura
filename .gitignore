@@ -122,3 +122,7 @@ projects/app/electron/app
 # deepcase
 /*.js
 /*.js.map
+
+
+
+dist/
