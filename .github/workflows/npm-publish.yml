@@ -14,7 +14,3 @@ jobs:
     uses: deep-foundation/workflows/.github/workflows/npm-publish.yml@main
     secrets:
       npm-token: ${{ secrets.NPM_TOKEN }}
-    with:
-      build-command: "npm run package:build"
-      test-command: "echo 'Tests are temporarely disabled'"
-      should-generate-documentation: false
