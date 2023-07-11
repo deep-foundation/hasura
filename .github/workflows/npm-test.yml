@@ -1,0 +1,10 @@
+name: Npm Test
+
+on:
+  pull_request:
+    types: [opened, reopened, edited]
+  workflow_dispatch:
+
+jobs:
+  main:
+    uses: deep-foundation/workflows/.github/workflows/npm-test.yml@main
