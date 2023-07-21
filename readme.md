@@ -1,6 +1,13 @@
 # deep-foundation hasura
 
-[![npm version](https://badge.fury.io/js/%40deep-foundation%2Fhasura.svg)](https://badge.fury.io/js/%40deep-foundation%2Fhasura) [![example](https://badgen.net/badge/example/gh-pages/gray)](https://deep-foundation.github.io/hasura/) [![develop deep-foundation](https://badgen.net/badge/develop/deep-foundation)](https://github.com/deep-foundation/dev)
+[![npm](https://img.shields.io/npm/v/@deep-foundation/hasura.svg)](https://www.npmjs.com/package/@deep-foundation/hasura)
+[![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/deep-foundation/hasura) 
+[![Discord](https://badgen.net/badge/icon/discord?icon=discord&label&color=purple)](https://discord.gg/deep-foundation)
+
+
+# Using
+## Library
+See [Documentation] for examples and API
 
 ## api
 
@@ -77,3 +84,4 @@ OR
 export NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE = 1;
 ```
 
+[Documentation]: https://deep-foundation.github.io/hasura/
