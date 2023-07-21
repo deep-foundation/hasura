@@ -5,7 +5,7 @@
 [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label&color=purple)](https://discord.gg/deep-foundation)
 
 
-# Using
+# Usage
 ## Library
 See [Documentation] for examples and API
 
