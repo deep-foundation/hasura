@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.8'
 services:
   postgres:
     container_name: deep-postgres
@@ -17,6 +17,11 @@ services:
       - 'PGGSSENCMODE=${PGGSSENCMODE}'
       - 'PGSSLMODE=${PGSSLMODE}'
       - 'PGREQUIRESSL=${PGREQUIRESSL}'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
   hasura:
     container_name: deep-hasura
     image: hasura/graphql-engine:v2.3.1
@@ -40,6 +45,11 @@ services:
       - 'HASURA_GRAPHQL_JWT_SECRET=${JWT_SECRET}'
       - 'HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=${HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS}'
       - 'HASURA_GRAPHQL_UNAUTHORIZED_ROLE=${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
   storage:
     container_name: deep-hasura-storage
     image: nhost/hasura-storage:0.2.3
@@ -62,6 +72,11 @@ services:
       - 'POSTGRES_MIGRATIONS=${POSTGRES_MIGRATIONS}'
       - 'POSTGRES_MIGRATIONS_SOURCE=${POSTGRES_MIGRATIONS_SOURCE}'
     command: serve
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
   minio:
     container_name: deep-minio
     image: minio/minio
@@ -77,6 +92,11 @@ services:
       - 'MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}'
     entrypoint: sh
     command: '-c ''mkdir -p /export/default && /opt/bin/minio server --address 0.0.0.0:9000 --console-address 0.0.0.0:32765 /export'''
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
 volumes:
   db-data:
     name: deep-db-data
