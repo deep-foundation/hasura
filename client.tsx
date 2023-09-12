@@ -1,4 +1,10 @@
-import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
+import { HttpLink, InMemoryCache, ApolloClient as BaseApolloClient } from '@apollo/client';
+
+export type ApolloClient = BaseApolloClient<any> & {
+  path: string;
+  ssl: boolean;
+  jwt_token: string;
+};
 import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
@@ -37,7 +43,7 @@ export function generateHeaders(options: IApolloClientGeneratorOptions) {
   return headers;
 }
 
-export interface IApolloClient<T> extends ApolloClient<T> {
+export interface IApolloClient<T> extends ApolloClient {
   jwt_token?: string;
   path?: string;
   ssl?: boolean;
@@ -51,7 +57,7 @@ export function generateApolloClient(
     ApolloClient?: any;
     InMemoryCache?: any;
   },
-): ApolloClient<any> {
+): ApolloClient {
   debug('generateApolloClient', options, forwardingArguments);
 
   const isRelative = typeof(options?.relative) === 'boolean' ? options.relative : typeof(ENV_RELATIVE) === 'boolean' ? ENV_RELATIVE : false;
@@ -100,7 +106,7 @@ export function generateApolloClient(
         httpLink,
       );
 
-  const client: IApolloClient<any> = new ApolloClient({
+  const client: IApolloClient<any> = new BaseApolloClient({
     ssrMode: true,
     // @ts-ignore
     link: concat(authMiddleware, link),
