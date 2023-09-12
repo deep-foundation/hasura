@@ -1,10 +1,15 @@
-import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
+import { HttpLink, InMemoryCache, ApolloClient as BaseApolloClient } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
 import Debug from 'debug';
+
+export type ApolloClient = BaseApolloClient<any> & {
+  path: string;
+  ssl: boolean;
+}
 
 const debug = Debug('hasura:client');
 
@@ -51,34 +56,34 @@ export function generateApolloClient(
     ApolloClient?: any;
     InMemoryCache?: any;
   },
-): ApolloClient<any> {
+): ApolloClient {
   debug('generateApolloClient', options, forwardingArguments);
 
-  const isRelative = typeof(options?.relative) === 'boolean' ? options.relative : typeof(ENV_RELATIVE) === 'boolean' ? ENV_RELATIVE : false;
-  const headers = generateHeaders(options);
-
-  const httpLink = new HttpLink({
-    uri: `${isRelative ? '' : `http${options.ssl ? 's' : ''}:/`}${path.normalize('/' + (options.path || ''))}`,
+  const client: ApolloClient = new ApolloClient({
+    ssrMode: true,
     // @ts-ignore
-    fetch,
-    headers,
-  });
-
-  const wsLink = options.ws
-    ? new WebSocketLink({
-      uri: `${isRelative ? (host ? `ws${options.ssl ? 's' : ''}://${host}` : '') : `ws${options.ssl ? 's' : ''}:/`}${path.normalize('/' + (options.path || ''))}`,
-      options: {
-        lazy: true,
-        reconnect: true,
-        connectionParams: () => ({
-          headers,
-        }),
+    link: concat(authMiddleware, link),
+    connectToDevTools: true,
+    cache: new InMemoryCache({
+      ...forwardingArguments?.InMemoryCache,
+      freezeResults: false,
+      resultCaching: false,
+    }).restore(options.initialStore || {}),
+    ...forwardingArguments?.ApolloClient,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        // errorPolicy: 'ignore',
+        ...forwardingArguments?.ApolloClient?.defaultOptions?.watchQuery,
       },
-      webSocketImpl: ws,
-    })
-    : null;
-
-  const authMiddleware = new ApolloLink((operation, forward) => {
+      query: {
+        fetchPolicy: 'no-cache',
+        // errorPolicy: 'ignore',
+        ...forwardingArguments?.ApolloClient?.defaultOptions?.query,
+      },
+      ...forwardingArguments?.ApolloClient?.defaultOptions,
+    },
+  });
     operation.setContext({
       headers,
     });
