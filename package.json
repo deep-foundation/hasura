@@ -10,14 +10,8 @@
   },
   "description": "",
   "dependencies": {
-    "@apollo/client": "^3.7.14",
-    "@apollo/react-hooks": "^4.0.0",
     "@types/node": "^14.17.14",
     "@types/react": "^18.2.15",
-    "apollo-boost": "^0.4.9",
-    "apollo-link": "^1.2.14",
-    "apollo-link-ws": "^1.0.20",
-    "apollo-server-micro": "^2.21.0",
     "axios": "^0.21.1",
     "babel-register": "^6.26.0",
     "cors": "^2.8.5",
@@ -28,10 +22,8 @@
     "node-fetch": "^2.6.1",
     "normalize-url": "^7.0.2",
     "path": "^0.12.7",
-    "react": "^18.2.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.9.1",
-    "ws": "^7.5.6"
+    "ts-node": "^10.9.1"
   },
   "scripts": {
     "package:build": "npx tsc --project tsconfig.json",
@@ -45,5 +37,15 @@
     "cross-env": "^7.0.3",
     "pre-commit": "^1.2.2",
     "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "@apollo/client": "^3.7.14",
+    "@apollo/react-hooks": "^4.0.0",
+    "apollo-boost": "^0.4.9",
+    "apollo-link": "^1.2.14",
+    "apollo-link-ws": "^1.0.20",
+    "apollo-server-micro": "^2.21.0",
+    "react": "^18.2.0",
+    "ws": "^7.5.6"
   }
 }
