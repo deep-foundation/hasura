@@ -4,9 +4,9 @@ import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
-import Debug from 'debug';
+import { debug } from './debug';
 
-const debug = Debug('hasura:client');
+const moduleLog = debug.extend('client')
 
 let ws;
 if (typeof(window) !== 'object') {
@@ -52,7 +52,8 @@ export function generateApolloClient(
     InMemoryCache?: any;
   },
 ): ApolloClient<any> {
-  debug('generateApolloClient', options, forwardingArguments);
+  const log = moduleLog.extend(generateApolloClient.name)
+  log({options, forwardingArguments});
 
   const isRelative = typeof(options?.relative) === 'boolean' ? options.relative : typeof(ENV_RELATIVE) === 'boolean' ? ENV_RELATIVE : false;
   const headers = generateHeaders(options);
@@ -129,6 +130,7 @@ export function generateApolloClient(
   client.jwt_token = options.token;
   client.path = options.path;
   client.ssl = options.ssl;
+  log({ client });
 
   return client;
 }
