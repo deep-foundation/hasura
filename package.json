@@ -33,7 +33,10 @@
     "docker": "cross-env JWT_SECRET=\"{\\\"type\\\":\\\"HS256\\\",\\\"key\\\":\\\"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\\\"}\" HASURA_GRAPHQL_DATABASE_URL=postgres://postgres:postgrespassword@postgres:5432/postgres HASURA_GRAPHQL_ENABLE_CONSOLE=true HASURA_GRAPHQL_DEV_MODE=true HASURA_GRAPHQL_LOG_LEVEL=debug HASURA_GRAPHQL_ENABLED_LOG_TYPES=\"startup, http-log, webhook-log, websocket-log, query-log\" HASURA_GRAPHQL_ADMIN_SECRET=myadminsecretkey HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true HASURA_GRAPHQL_UNAUTHORIZED_ROLE=undefined POSTGRES_USER=postgres POSTGRES_PASSWORD=postgrespassword PGGSSENCMODE=disable PGSSLMODE=disable PGREQUIRESSL=0 MINIO_ROOT_USER=minioaccesskey MINIO_ROOT_PASSWORD=miniosecretkey HASURA_STORAGE_DEBUG=true HASURA_METADATA=1 HASURA_ENDPOINT=http://host.docker.internal:8080/v1 S3_ENDPOINT=http://host.docker.internal:9000 S3_ACCESS_KEY=minioaccesskey S3_SECRET_KEY=miniosecretkey S3_BUCKET=default S3_ROOT_FOLDER=default POSTGRES_MIGRATIONS=0 POSTGRES_MIGRATIONS_SOURCE=postgres://postgres:postgrespassword@host.docker.internal:5432/postgres?sslmode=disable npm run docker-local"
   },
   "devDependencies": {
+    "@tsconfig/recommended": "^1.0.3",
+    "@types/cors": "^2.8.14",
     "@types/debug": "^4.1.9",
+    "@types/node-fetch": "^2.6.6",
     "cross-env": "^7.0.3",
     "pre-commit": "^1.2.2",
     "typescript": "5.0.4"

@@ -1,26 +1,11 @@
 {
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "exclude": [
+    "jest.config.ts",
+  ],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "removeComments": true,
     "jsx": "react",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es2015",
-    "skipLibCheck": true,
-    "lib": [
-      "dom",
-      "es6",
-      "es7"
-    ],
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
     "declaration": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "sourceMap": true
   }
 }

@@ -13,7 +13,7 @@ export const generateAuthWebhookNextjs = function generateAuthWebhookNextjs(
   options: AuthWebhookOptions,
 ) {
   const cors = Cors({ methods: ['GET', 'HEAD'] });
-  return async (req, res) => {
+  return async (req: any, res: any) => {
     await corsMiddleware(req, res, cors);
     const bearer = req?.headers['Authorization'] || req?.headers['authorization'];
     const token = bearer.slice(7);
