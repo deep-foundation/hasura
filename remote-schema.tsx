@@ -17,7 +17,7 @@ export const generateRemoteSchema = function generateRemoteSchema(
   });
   const handler = apolloServer.createHandler({ path });
   return {
-    default: async (req: any, res: any) => {
+    default: async (req, res) => {
       await corsMiddleware(req, res, cors);
       return await handler(req, res);
     },

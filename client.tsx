@@ -8,7 +8,7 @@ import { debug } from './debug';
 
 const moduleLog = debug.extend('client')
 
-let ws: any;
+let ws;
 if (typeof(window) !== 'object') {
   ws = require('ws');
 }
@@ -96,7 +96,6 @@ export function generateApolloClient(
           const def = getMainDefinition(query);
           return def?.kind === 'OperationDefinition' && def?.operation === 'subscription';
         },
-        // @ts-ignore
         wsLink,
         // @ts-ignore
         httpLink,
