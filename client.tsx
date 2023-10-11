@@ -4,7 +4,7 @@ import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
-import { debug } from './debug';
+import { debug } from './debug.js';
 
 const moduleLog = debug.extend('client')
 
