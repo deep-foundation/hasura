@@ -1,6 +1,6 @@
 import { ApolloServer, Config } from 'apollo-server-micro';
 import Cors from 'cors';
-import { corsMiddleware } from './cors-middleware';
+import { corsMiddleware } from './cors-middleware.js';
 
 export interface RemoteSchemaOptions extends Config {
   path: string;
