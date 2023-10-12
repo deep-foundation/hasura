@@ -1,17 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "jsx": "react-jsx",
-    "module": "Node16",
-    "resolveJsonModule": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node16",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015",
     "skipLibCheck": true,
-    // Only for hasura, react-hasura, materialized-path, deeplinks because they are bad typed
-    "strictNullChecks": false,
-    "strict": false,
-
-  },
+    "lib": [
+      "dom",
+      "es6",
+      "es7"
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  }
 }

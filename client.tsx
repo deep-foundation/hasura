@@ -1,10 +1,10 @@
 import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
-import { getMainDefinition } from '@apollo/client/utilities/index.js';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
-import { debug } from './debug.js';
+import { debug } from './debug';
 
 const moduleLog = debug.extend('client')
 

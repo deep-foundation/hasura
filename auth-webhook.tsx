@@ -1,5 +1,5 @@
 import Cors from 'cors';
-import { corsMiddleware } from './cors-middleware.js';
+import { corsMiddleware } from './cors-middleware';
 
 export interface AuthWebhookOptions {
   findUserByToken: (token: string) => Promise<{
