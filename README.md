@@ -7,7 +7,7 @@
 ## Library
 See [Documentation] for examples and API
 
-## api
+## API
 
 ```ts
 import { HasuraApi } from '@deep-foundation/hasura/api';
@@ -37,7 +37,7 @@ await api.query({
 });
 ```
 
-## client
+## Client
 ```ts
 import { generateApolloClient } from '@deep-foundation/hasura/client';
 import gql from 'graphql-tag';
@@ -80,6 +80,70 @@ export DEEP_FOUNDATION_HASURA_RELATIVE = 1;
 OR
 ```sh
 export NEXT_PUBLIC_DEEP_FOUNDATION_HASURA_RELATIVE = 1;
+```
+
+## Dignostics
+
+### PostgreSQL
+
+#### Get PostgreSQL logs:
+
+```sh
+docker logs deep-postgres
+```
+
+#### Connect to PostgreSQL from inside its docker container:
+
+```sh
+docker exec -it deep-postgres bash
+su postgres
+psql
+```
+
+#### Get the size of all tables in the databases and indexes:
+```sql
+SELECT
+  nspname                                               AS "schema",
+  pg_class.relname                                      AS "table",
+  pg_size_pretty(pg_total_relation_size(pg_class.oid))  AS "total_size",
+  pg_size_pretty(pg_relation_size(pg_class.oid))        AS "data_size",
+  pg_size_pretty(pg_indexes_size(pg_class.oid))         AS "index_size",
+  pg_stat_user_tables.n_live_tup                        AS "rows",
+  pg_size_pretty(
+    pg_total_relation_size(pg_class.oid) / 
+    (pg_stat_user_tables.n_live_tup + 1)
+  )                                                     AS "total_row_size",
+  pg_size_pretty(
+    pg_relation_size(pg_class.oid) / 
+    (pg_stat_user_tables.n_live_tup + 1)
+  )                                                     AS "row_size"
+FROM 
+  pg_stat_user_tables 
+JOIN 
+  pg_class
+ON
+  pg_stat_user_tables.relid = pg_class.oid
+JOIN 
+  pg_catalog.pg_namespace AS ns
+ON
+  pg_class.relnamespace = ns.oid
+ORDER BY 
+  pg_total_relation_size(pg_class.oid) DESC;
+```
+
+#### Get the list of active queries:
+
+```sql
+SELECT datname, pid, state, query, age(clock_timestamp(), query_start) AS age 
+FROM pg_stat_activity
+WHERE state <> 'idle' 
+    AND query NOT LIKE '% FROM pg_stat_activity %' 
+ORDER BY age;
+```
+
+#### Cancel the query
+```sql
+SELECT pg_cancel_backend(pid);
 ```
 
 [Documentation]: https://deep-foundation.github.io/hasura/
