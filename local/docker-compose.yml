@@ -86,7 +86,7 @@ services:
       - 'minio-config:/root/.minio'
     ports:
       - "${DEEP_MINIO_UI_PORT_HOST:-9000}:${DEEP_MINIO_UI_PORT:-9000}"
-      - "${DEEP_MINIO_PORT_HOST_2:-32765}:${DEEP_MINIO_PORT_2:-32765}"
+      - "${DEEP_MINIO_PORT_HOST:-32765}:${DEEP_MINIO_PORT:-32765}"
     environment:
       - 'MINIO_ROOT_USER=${MINIO_ROOT_USER}'
       - 'MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}'
