@@ -147,3 +147,17 @@ SELECT pg_cancel_backend(pid);
 ```
 
 [Documentation]: https://deep-foundation.github.io/hasura/
+
+## Maintenance
+
+### Publish new version
+
+```
+npm version patch && git push
+```
+
+After that it might be required to release new versions of:
+https://github.com/deep-foundation/materialized-path
+https://github.com/deep-foundation/react-hasura
+https://github.com/deep-foundation/deeplinks
+
