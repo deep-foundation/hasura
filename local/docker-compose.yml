@@ -57,7 +57,7 @@ services:
       - hasura
     restart: unless-stopped
     ports:
-      - "${DEEP_STORAGE_PORT:-8000}:8000"
+      - "${DEEP_HASURA_STORAGE_PORT:-8000}:8000"
     extra_hosts: ['host.docker.internal:host-gateway']
     environment:
       - 'DEBUG=${HASURA_STORAGE_DEBUG}'
