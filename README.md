@@ -150,14 +150,21 @@ SELECT pg_cancel_backend(pid);
 
 ## Maintenance
 
-### Publish new version
+### Refresh package-lock.json
 
+This command deletes `node_modules`, `package-lock.json` and runs `npm i`. So everything is refreshed.
+
+```bash
+npm run package:refresh
 ```
-npm version patch && git push
+
+### Release a new version
+
+```bash
+npm run package:release
 ```
 
 After that it might be required to release new versions of:
 1. https://github.com/deep-foundation/react-hasura
 2. https://github.com/deep-foundation/materialized-path
 3. https://github.com/deep-foundation/deeplinks
-
