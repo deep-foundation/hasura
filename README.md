@@ -157,7 +157,7 @@ npm version patch && git push
 ```
 
 After that it might be required to release new versions of:
-1. https://github.com/deep-foundation/materialized-path
-2. https://github.com/deep-foundation/react-hasura
+1. https://github.com/deep-foundation/react-hasura
+2. https://github.com/deep-foundation/materialized-path
 3. https://github.com/deep-foundation/deeplinks
 
