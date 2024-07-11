@@ -5,6 +5,8 @@ import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'node-fetch';
 import path from 'path';
 import { debug } from './debug';
+import {createNetworkStatusNotifier} from 'react-apollo-network-status';
+import { NetworkStatus, UseApolloNetworkStatusOptions } from 'react-apollo-network-status/dist/src/useApolloNetworkStatus';
 
 const moduleLog = debug.extend('client')
 
@@ -41,6 +43,7 @@ export interface IApolloClient<T> extends ApolloClient<T> {
   jwt_token?: string;
   path?: string;
   ssl?: boolean;
+  useApolloNetworkStatus?: (options?: UseApolloNetworkStatusOptions | undefined) => NetworkStatus;
 }
 
 const host = typeof(window) === 'object' ? window.location.host : '';
@@ -100,11 +103,13 @@ export function generateApolloClient(
         // @ts-ignore
         httpLink,
       );
+  
+  const {link: notifierLink, useApolloNetworkStatus} = createNetworkStatusNotifier();
 
   const client: IApolloClient<any> = new ApolloClient({
     ssrMode: true,
     // @ts-ignore
-    link: concat(authMiddleware, link),
+    link: concat(notifierLink, concat(authMiddleware, link)),
     connectToDevTools: true,
     cache: new InMemoryCache({
       ...forwardingArguments?.InMemoryCache,
@@ -130,6 +135,7 @@ export function generateApolloClient(
   client.jwt_token = options.token;
   client.path = options.path;
   client.ssl = options.ssl;
+  client.useApolloNetworkStatus = useApolloNetworkStatus;
   log({ client });
 
   return client;
