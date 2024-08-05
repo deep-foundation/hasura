@@ -1,6 +1,6 @@
 {
   "name": "@deep-foundation/hasura",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "license": "Unlicense",
   "author": "Ivan S Glazunov <ivansglazunov@gmail.com>",
   "homepage": "https://github.com/deep-foundation/hasura",
@@ -33,7 +33,7 @@
     "package:unbuild": "rimraf ./*.js && rimraf ./*.js.map && rimraf ./*.d.ts",
     "package:publish": "npm run package:build && npm publish --access public && npm run package:unbuild",
     "package:release": "npm version patch && git push",
-    "docker-local": "cd ./local && docker-compose -p deep up -d && cd ../",
+    "docker-local": "cd ./local && docker compose -p deep up -d && cd ../",
     "docker": "cross-env DEEP_POSTGRES_PORT=5432 DEEP_POSTGRES_USER=postgres DEEP_POSTGRES_PASSWORD=postgrespassword DEEP_POSTGRES_GSS_ENCODING_MODE=disable DEEP_POSTGRES_SSL_MODE=disable DEEP_POSTGRES_REQUIRE_SSL=0 DEEP_HASURA_PORT=8080 DEEP_HASURA_GRAPHQL_DATABASE_URL=postgres://postgres:postgrespassword@postgres:5432/postgres DEEP_HASURA_GRAPHQL_ENABLE_CONSOLE=true DEEP_HASURA_GRAPHQL_DEV_MODE=true DEEP_HASURA_GRAPHQL_LOG_LEVEL=debug DEEP_HASURA_GRAPHQL_ENABLED_LOG_TYPES=\"startup, http-log, webhook-log, websocket-log, query-log\" DEEP_HASURA_GRAPHQL_ADMIN_SECRET=myadminsecretkey DEEP_HASURA_GRAPHQL_JWT_SECRET=\"{\\\"type\\\":\\\"HS256\\\",\\\"key\\\":\\\"3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R\\\"}\" DEEP_HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true DEEP_HASURA_GRAPHQL_UNAUTHORIZED_ROLE=undefined DEEP_HASURA_STORAGE_PORT=8000 DEEP_HASURA_STORAGE_HASURA_GRAPHQL_ADMIN_SECRET=myadminsecretkey DEEP_HASURA_STORAGE_DEBUG=true DEEP_HASURA_STORAGE_HASURA_METADATA=1 DEEP_HASURA_STORAGE_HASURA_ENDPOINT=http://host.docker.internal:8080/v1 DEEP_HASURA_STORAGE_S3_ENDPOINT=http://host.docker.internal:9000 DEEP_HASURA_STORAGE_S3_ACCESS_KEY=minioaccesskey DEEP_HASURA_STORAGE_S3_SECRET_KEY=minioaccesskey DEEP_HASURA_STORAGE_S3_BUCKET=default DEEP_HASURA_STORAGE_S3_ROOT_FOLDER=default DEEP_HASURA_STORAGE_POSTGRES_MIGRATIONS=0 DEEP_HASURA_STORAGE_POSTGRES_MIGRATIONS_SOURCE=postgres://postgres:postgrespassword@host.docker.internal:5432/postgres?sslmode=disable npm run docker-local DEEP_MINIO_PORT=9000 DEEP_MINIO_CONSOLE_PORT=32765 DEEP_MINIO_ROOT_USER=minioaccesskey DEEP_MINIO_ROOT_PASSWORD=miniosecretkey npm run docker-local"
   },
   "devDependencies": {
